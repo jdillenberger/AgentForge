@@ -48,6 +48,13 @@ export interface TemplateInfo {
   frontmatter: Record<string, any>;
 }
 
+export interface SchemaInfo {
+  id: string;
+  title: string;
+  description: string;
+  version?: string;
+}
+
 import { authService } from './auth.service';
 import { configService } from './config.service';
 
@@ -194,6 +201,32 @@ export class ApiService {
         throw new Error('Authentication required');
       }
       throw new Error('Failed to fetch file version');
+    }
+    return response.json();
+  }
+
+  // Schema API methods
+  static async getSchemas(): Promise<SchemaInfo[]> {
+    const response = await authService.authenticatedFetch(`${this.getApiBase()}/schemas`);
+    if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error('Authentication required');
+      }
+      throw new Error('Failed to fetch schemas');
+    }
+    return response.json();
+  }
+
+  static async getSchema(schemaId: string): Promise<any> {
+    const response = await authService.authenticatedFetch(`${this.getApiBase()}/schemas/${encodeURIComponent(schemaId)}`);
+    if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error('Authentication required');
+      }
+      if (response.status === 404) {
+        throw new Error('Schema not found');
+      }
+      throw new Error('Failed to fetch schema');
     }
     return response.json();
   }

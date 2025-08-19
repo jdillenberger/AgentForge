@@ -1,9 +1,4 @@
-import { configService } from './config.service';
-import { authService } from './auth.service';
-
-function getApiBaseUrl(): string {
-  return configService.getBaseUrl() + '/api';
-}
+import { ApiService } from './api';
 
 export interface SchemaProperty {
   type: string;
@@ -38,6 +33,7 @@ export interface SchemaInfo {
   id: string;
   title: string;
   description: string;
+  version?: string;
 }
 
 interface FormKitField {
@@ -61,11 +57,7 @@ export class SchemaService {
 
   static async loadSchemas(): Promise<void> {
     try {
-      const response = await authService.authenticatedFetch(`${getApiBaseUrl()}/schemas`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch schema list');
-      }
-      this.schemaList = await response.json();
+      this.schemaList = await ApiService.getSchemas();
       
       // Pre-load all schemas
       for (const schemaInfo of this.schemaList) {
@@ -82,12 +74,7 @@ export class SchemaService {
         return this.schemas[schemaId];
       }
 
-      const response = await authService.authenticatedFetch(`${getApiBaseUrl()}/schemas/${schemaId}`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch schema: ${schemaId}`);
-      }
-      
-      const schema = await response.json();
+      const schema = await ApiService.getSchema(schemaId);
       this.schemas[schemaId] = schema;
       return schema;
     } catch (error) {

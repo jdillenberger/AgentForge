@@ -89,11 +89,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
-import { SchemaService, type SchemaInfo } from '../../services/schema'
 import { buildFilename } from '../../utils/filename-utils'
-import { ApiService, type NamespaceInfo, type TemplateInfo } from '../../services/api'
-import { authService } from '../../services/auth.service'
-import { configService } from '../../services/config.service'
+import { ApiService, type NamespaceInfo, type TemplateInfo, type SchemaInfo } from '../../services/api'
 
 const props = defineProps<{
   show: boolean
@@ -165,13 +162,9 @@ const loadTemplates = async (schemaType: string) => {
 }
 
 onMounted(async () => {
-  await SchemaService.loadSchemas()
   // Load schemas
   try {
-    const response = await authService.authenticatedFetch(`${configService.getBaseUrl()}/api/schemas`)
-    if (response.ok) {
-      availableSchemas.value = await response.json()
-    }
+    availableSchemas.value = await ApiService.getSchemas()
   } catch (error) {
     console.error('Error loading schemas:', error)
   }
