@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Simple AI Agent",
+  "description": "Basic AI agent configuration with essential settings",
+  "properties": {
+    "type": {
+      "type": "string",
+      "title": "Agent Type",
+      "description": "The type of agent schema to use",
+      "const": "simple-agent"
+    },
+    "title": {
+      "type": "string",
+      "title": "Agent Title",
+      "description": "The display name of the AI agent",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "language": {
+      "type": "string",
+      "title": "Language",
+      "description": "The language code for the agent",
+      "enum": ["en-US", "de-DE", "fr-FR", "es-ES", "it-IT", "pt-PT"],
+      "default": "en-US"
+    },
+    "voice": {
+      "type": "string",
+      "title": "Voice",
+      "description": "The voice to use for speech synthesis",
+      "enum": [
+        "en-US-AvaNeural",
+        "en-US-AndrewNeural", 
+        "en-US-EmmaNeural",
+        "de-DE-KatjaNeural",
+        "fr-FR-DeniseNeural"
+      ],
+      "default": "en-US-AvaNeural"
+    },
+    "enabled": {
+      "type": "boolean",
+      "title": "Enabled",
+      "description": "Whether this agent is active and available",
+      "default": true
+    },
+    "greeting": {
+      "type": "string",
+      "title": "Greeting Message",
+      "description": "The initial message the agent will use to greet users",
+      "minLength": 10,
+      "maxLength": 500
+    },
+    "temperature": {
+      "type": "number",
+      "title": "Temperature",
+      "description": "Controls randomness in responses (0.0 to 2.0)",
+      "minimum": 0.0,
+      "maximum": 2.0,
+      "default": 0.7,
+      "multipleOf": 0.1
+    }
+  },
+  "required": ["title", "language", "voice"],
+  "additionalProperties": true
+}

@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Healthcare AI Agent",
+  "description": "Specialized AI agent for healthcare customer service and appointment management",
+  "properties": {
+    "type": {
+      "type": "string",
+      "title": "Agent Type",
+      "description": "The type of agent schema to use",
+      "const": "healthcare-agent"
+    },
+    "inbound_agents": {
+      "type": "object",
+      "title": "Inbound Agent Configurations",
+      "description": "Healthcare-specific agent configurations",
+      "patternProperties": {
+        "^[a-zA-Z0-9_]+$": {
+          "type": "object",
+          "title": "Healthcare Agent",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Agent Name",
+              "description": "Display name for the healthcare agent",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "greeting": {
+              "type": "string",
+              "title": "Patient Greeting",
+              "description": "Initial greeting message for patients",
+              "minLength": 10,
+              "maxLength": 500,
+              "default": "Hello, I'm here to help you with your healthcare needs."
+            },
+            "instructions": {
+              "type": "string",
+              "title": "Instructions File",
+              "description": "Path to detailed instructions file",
+              "pattern": "^.*\\.(txt|md)$",
+              "default": "instructions_healthcare.txt"
+            },
+            "language": {
+              "type": "string", 
+              "title": "Language",
+              "description": "Primary language for patient communication",
+              "enum": ["en-US", "de-DE", "fr-FR", "es-ES"],
+              "default": "en-US"
+            },
+            "voice": {
+              "type": "string",
+              "title": "Voice Model",
+              "description": "Voice synthesis model for patient interactions",
+              "enum": [
+                "en-US-AvaNeural",
+                "en-US-EmmaNeural", 
+                "de-DE-KatjaNeural",
+                "fr-FR-DeniseNeural"
+              ],
+              "default": "en-US-EmmaNeural"
+            },
+            "ending": {
+              "type": "string",
+              "title": "Closing Message",
+              "description": "Message to end patient conversations",
+              "maxLength": 200,
+              "default": "Thank you for contacting us. Have a great day!"
+            },
+            "mcp_servers": {
+              "type": "object",
+              "title": "Medical Connection Servers",
+              "description": "External healthcare system integrations",
+              "properties": {
+                "healthcare": {
+                  "type": "string",
+                  "title": "Healthcare System Webhook",
+                  "description": "Primary healthcare system integration endpoint",
+                  "format": "uri",
+                  "default": "${MCP_IN_HEALTHCARE_WEBHOOK}"
+                },
+                "appointments": {
+                  "type": "string",
+                  "title": "Appointment System",
+                  "description": "Appointment booking system endpoint",
+                  "format": "uri"
+                },
+                "pharmacy": {
+                  "type": "string",
+                  "title": "Pharmacy Integration",
+                  "description": "Pharmacy system for prescriptions",
+                  "format": "uri"
+                }
+              }
+            },
+            "specialization": {
+              "type": "string",
+              "title": "Medical Specialization",
+              "description": "Healthcare specialization focus",
+              "enum": [
+                "General Practice",
+                "Cardiology", 
+                "Dermatology",
+                "Pediatrics",
+                "Mental Health",
+                "Emergency Care",
+                "Appointment Booking"
+              ],
+              "default": "General Practice"
+            },
+            "working_hours": {
+              "type": "object",
+              "title": "Working Hours",
+              "description": "Available hours for patient interactions",
+              "properties": {
+                "monday": {"type": "string", "title": "Monday", "pattern": "^([0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}|closed)$", "default": "08:00-17:00"},
+                "tuesday": {"type": "string", "title": "Tuesday", "pattern": "^([0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}|closed)$", "default": "08:00-17:00"},
+                "wednesday": {"type": "string", "title": "Wednesday", "pattern": "^([0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}|closed)$", "default": "08:00-17:00"},
+                "thursday": {"type": "string", "title": "Thursday", "pattern": "^([0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}|closed)$", "default": "08:00-17:00"},
+                "friday": {"type": "string", "title": "Friday", "pattern": "^([0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}|closed)$", "default": "08:00-17:00"},
+                "saturday": {"type": "string", "title": "Saturday", "pattern": "^([0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}|closed)$", "default": "closed"},
+                "sunday": {"type": "string", "title": "Sunday", "pattern": "^([0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}|closed)$", "default": "closed"}
+              }
+            }
+          },
+          "required": ["name", "greeting", "language", "voice"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["inbound_agents"],
+  "additionalProperties": true
+}

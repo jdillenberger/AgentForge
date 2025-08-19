@@ -1,0 +1,36 @@
+services:
+  backend:
+    build:
+      context: .
+      target: development
+    container_name: ghmd-editor-backend-dev
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - CORS_ORIGIN=http://localhost:5173
+      - LOG_LEVEL=debug
+    volumes:
+      - ./backend:/app/backend
+      - /app/backend/node_modules
+    command: ["sh", "-c", "cd backend && npm run dev"]
+
+  frontend:
+    build:
+      context: .
+      target: development
+    container_name: ghmd-editor-frontend-dev
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:3001
+      - VITE_APP_TITLE=GHMD Editor (Dev)
+    volumes:
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
+    command: ["sh", "-c", "cd frontend && npm run dev -- --host 0.0.0.0 --port 5173"]
+    depends_on:
+      - backend

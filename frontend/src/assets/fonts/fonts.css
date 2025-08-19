@@ -1,0 +1,117 @@
+/* Local Font Definitions for GDPR Compliance */
+
+/* Inter Font Family - UI Font (18pt - optimized for UI elements) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./Inter_18pt-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./Inter_18pt-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./Inter_18pt-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./Inter_18pt-Bold.ttf') format('truetype');
+}
+
+/* Inter Display - Large Headings (28pt - optimized for large display text) */
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./Inter_28pt-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./Inter_28pt-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./Inter_28pt-Bold.ttf') format('truetype');
+}
+
+/* Source Serif 4 - Content Font */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./SourceSerif4-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./SourceSerif4-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./SourceSerif4-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./SourceSerif4-Bold.ttf') format('truetype');
+}
+
+/* JetBrains Mono - Code Font */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./JetBrainsMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./JetBrainsMono-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./JetBrainsMono-Bold.ttf') format('truetype');
+}
